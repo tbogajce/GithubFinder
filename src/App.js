@@ -4,6 +4,12 @@ import Users from './components/users/Users';
 import axios from 'axios';
 import './App.css';
 
+const github = axios.create({
+  baseURL: 'https://api.github.com',
+  timeout: 1000,
+  headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN },
+});
+
 class App extends Component {
   state = {
     users: [],
@@ -13,7 +19,7 @@ class App extends Component {
   // lifecycle method useful when we want to for example make HTTP request (in our case to github)
   async componentDidMount() {
     this.setState({ loading: true });
-    const res = await axios.get('https://api.github.com/users');
+    const res = await github.get('/users');
     this.setState({ users: res.data, loading: false });
   }
 

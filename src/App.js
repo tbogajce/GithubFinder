@@ -13,8 +13,6 @@ import GithubState from './context/github/GithubState';
 import './App.css';
 
 const App = () => {
-    const [users, setUsers] = useState([]);
-    const [user, setUser] = useState({});
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState(null);
@@ -33,25 +31,25 @@ const App = () => {
     // }
 
     // Search Github users - https://developer.github.com/v3/search/#search-users
-    const searchUsers = async (text) => {
-        setLoading(true);
-        setAlert(null);
+    // const searchUsers = async (text) => {
+    //     setLoading(true);
+    //     setAlert(null);
 
-        const res = await github.get(`/search/users?q=${text}`);
+    //     const res = await github.get(`/search/users?q=${text}`);
 
-        setUsers(res.data.items);
-        setLoading(false);
-    };
+    //     setUsers(res.data.items);
+    //     setLoading(false);
+    // };
 
     // Get single Github user - https://developer.github.com/v3/users/#get-a-single-user
-    const getUser = async (username) => {
-        setLoading(true);
+    // const getUser = async (username) => {
+    //     setLoading(true);
 
-        const res = await github.get(`/users/${username}`);
+    //     const res = await github.get(`/users/${username}`);
 
-        setUser(res.data);
-        setLoading(false);
-    };
+    //     setUser(res.data);
+    //     setLoading(false);
+    // };
 
     // Get users repos - https://developer.github.com/v3/repos/#list-repositories-for-a-user
     const getUserRepos = async (username) => {
@@ -64,10 +62,10 @@ const App = () => {
     };
 
     // Clear users from state
-    const clearUsers = () => {
-        setUsers([]);
-        setLoading(false);
-    };
+    // const clearUsers = () => {
+    //     setUsers([]);
+    //     setLoading(false);
+    // };
 
     // Set Alert
     const showAlert = (msg, type) => {
@@ -89,13 +87,8 @@ const App = () => {
                                 render={(props) => (
                                     <Fragment>
                                         <Alert alert={alert} />
-                                        <Search
-                                            searchUsers={searchUsers}
-                                            clearUsers={clearUsers}
-                                            showClear={users.length > 0 ? true : false}
-                                            setAlert={showAlert}
-                                        />
-                                        <Users loading={loading} users={users} />
+                                        <Search setAlert={showAlert} />
+                                        <Users />
                                     </Fragment>
                                 )}
                             />
@@ -104,14 +97,7 @@ const App = () => {
                                 exact
                                 path='/user/:login'
                                 render={(props) => (
-                                    <User
-                                        {...props}
-                                        getUser={getUser}
-                                        getUserRepos={getUserRepos}
-                                        user={user}
-                                        repos={repos}
-                                        loading={loading}
-                                    />
+                                    <User {...props} getUserRepos={getUserRepos} repos={repos} />
                                 )}
                             />
                         </Switch>

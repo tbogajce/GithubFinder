@@ -15,56 +15,6 @@ import './App.css';
 const App = () => {
     const [alert, setAlert] = useState(null);
 
-    // const github = axios.create({
-    //     baseURL: 'https://api.github.com',
-    //     timeout: 1000,
-    //     headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN },
-    // });
-
-    // lifecycle method useful when we want to for example make HTTP request (in our case to github)
-    // async componentDidMount() {
-    //   this.setState({ loading: true });
-    //   const res = await github.get('/users'); // https://developer.github.com/v3/users/#get-all-users
-    //   this.setState({ users: res.data, loading: false });
-    // }
-
-    // Search Github users - https://developer.github.com/v3/search/#search-users
-    // const searchUsers = async (text) => {
-    //     setLoading(true);
-    //     setAlert(null);
-
-    //     const res = await github.get(`/search/users?q=${text}`);
-
-    //     setUsers(res.data.items);
-    //     setLoading(false);
-    // };
-
-    // Get single Github user - https://developer.github.com/v3/users/#get-a-single-user
-    // const getUser = async (username) => {
-    //     setLoading(true);
-
-    //     const res = await github.get(`/users/${username}`);
-
-    //     setUser(res.data);
-    //     setLoading(false);
-    // };
-
-    // Get users repos - https://developer.github.com/v3/repos/#list-repositories-for-a-user
-    // const getUserRepos = async (username) => {
-    //     setLoading(true);
-
-    //     const res = await github.get(`/users/${username}/repos?per_page=5&sort=created:asc`);
-
-    //     setRepos(res.data);
-    //     setLoading(false);
-    // };
-
-    // Clear users from state
-    // const clearUsers = () => {
-    //     setUsers([]);
-    //     setLoading(false);
-    // };
-
     // Set Alert
     const showAlert = (msg, type) => {
         setAlert({ msg, type });

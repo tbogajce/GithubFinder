@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
@@ -9,43 +9,37 @@ import About from './components/pages/About';
 // import axios from 'axios';
 
 import GithubState from './context/github/GithubState';
+import AlertState from './context/alert/AlertState';
 
 import './App.css';
 
 const App = () => {
-    const [alert, setAlert] = useState(null);
-
-    // Set Alert
-    const showAlert = (msg, type) => {
-        setAlert({ msg, type });
-        // instead of changing state in different methods we can set timeout
-        // setTimeout(() => this.setState({ alert: null }), 5000);
-    };
-
     return (
         <GithubState>
-            <Router>
-                <div className='App'>
-                    <Navbar title='Github Finder' icon='fab fa-github' />
-                    <div className='container'>
-                        <Switch>
-                            <Route
-                                exact
-                                path='/'
-                                render={(props) => (
-                                    <Fragment>
-                                        <Alert alert={alert} />
-                                        <Search setAlert={showAlert} />
-                                        <Users />
-                                    </Fragment>
-                                )}
-                            />
-                            <Route exact path='/about' component={About} />
-                            <Route exact path='/user/:login' component={User} />
-                        </Switch>
+            <AlertState>
+                <Router>
+                    <div className='App'>
+                        <Navbar title='Github Finder' icon='fab fa-github' />
+                        <div className='container'>
+                            <Switch>
+                                <Route
+                                    exact
+                                    path='/'
+                                    render={(props) => (
+                                        <Fragment>
+                                            <Alert />
+                                            <Search />
+                                            <Users />
+                                        </Fragment>
+                                    )}
+                                />
+                                <Route exact path='/about' component={About} />
+                                <Route exact path='/user/:login' component={User} />
+                            </Switch>
+                        </div>
                     </div>
-                </div>
-            </Router>
+                </Router>
+            </AlertState>
         </GithubState>
     );
 };
